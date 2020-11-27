@@ -3,7 +3,7 @@ from datetime import datetime
 
 from . import user
 from ..import db
-from ..models import User,UserSchema
+from .models import User,UserSchema
 
 @user.route('/api/createCustomer',methods=['POST'])
 def createUser():

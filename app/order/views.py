@@ -2,15 +2,15 @@ from flask import request,jsonify
 
 from . import order
 from ..import db
-from ..models import Order
+from .models import Order
 
-@cart.route('/api/placeOrder',methods=['POST'])
+@order.route('/api/placeOrder',methods=['POST'])
 def placeOrder():
     if request.method == 'POST':
         data = request.get_json()
         cartsdata = data.get('cartdata')
         objects = []
-        for cartdata as cartsdata:
+        for cartdata in cartsdata:
             code = cartdata['code']
             user = cartdata['user']
             product = cartdata['product']

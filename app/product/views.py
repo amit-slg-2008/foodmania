@@ -2,7 +2,7 @@ from flask import request,jsonify
 
 from . import product
 from ..import db
-from ..models import Product,ProductSchema
+from .models import Product,ProductSchema
 
 @product.route('/api/createProduct',methods=['POST'])
 def createProduct():

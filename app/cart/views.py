@@ -2,7 +2,7 @@ from flask import request,jsonify
 
 from . import cart
 from ..import db
-from ..models import Cart,CartSchema
+from .models import Cart,CartSchema
 
 @cart.route('/api/addToCart',methods=['POST'])
 def addToCart():

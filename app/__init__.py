@@ -23,13 +23,16 @@ def create_app(config_name):
 
     migrate = Migrate(app, db)
 
-    from app import models
+    from . import models
 
     from .user import user as user_blueprint
     app.register_blueprint(user_blueprint)
 
     from .product import product as product_blueprint
     app.register_blueprint(product_blueprint)
+
+    from .order import order as order_blueprint
+    app.register_blueprint(order_blueprint)
 
     from .cart import cart as cart_blueprint
     app.register_blueprint(cart_blueprint)
