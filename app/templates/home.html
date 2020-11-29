@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="topnav">
+    <a class="active" href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <div class="search-container">
+      <form action="/action_page.php">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+</div>
+<div class="row">
+    <div class="pull-right carttotalitems">
+        <p>Cart : <span id="totalitems">0</span> items</p> 
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-8 productlist">
+        
+    </div>
+    <div class="col-sm-4">
+        <h4>Mini-Cart</h4>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Code</th>
+                <th scope="col">Quan</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody id="minicartbody">
+            </tbody>
+        </table>
+        <div class="buttongroup">
+          <a href=viewcart></a><button type="button" class="btn btn-primary pull-left">Checkout</button></a>
+          <a href=viewcart><button type="button" class="btn btn-primary pull-right">View Cart</button></a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

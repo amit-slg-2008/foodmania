@@ -8,21 +8,32 @@ from .models import User,UserSchema
 @user.route('/api/createCustomer',methods=['POST'])
 def createUser():
     if request.method == 'POST':
-        data = request.form
+        data = request.get_json()
         username = data.get('username')
         contactno = data.get('contactno')
         email = data.get('email')
         address = data.get('address')
 
-        user_data = User(username = username,
-                            contactno = contactno,
-                            email = email,
-                            address = address)
+        user_data = User.query.filter_by(email=email).first()
+        if not user_data:
+            user_add_data = User(username = username,
+                                contactno = contactno,
+                                email = email,
+                                address = address)
 
-        db.session.add(user_data)
-        db.session.commit()
+            db.session.add(user_add_data)
+            db.session.commit()
 
-        return jsonify({'message':'Data added sucessfully','status':200})
+            return jsonify({'userid' : user_add_data.id,'message':'Data added sucessfully','status':200})
+        else:
+            user_data.username = username
+            user_data.contactno = contactno
+            user_data.address = address
+            user_data.updated_on = datetime.now()
+
+            db.session.commit()
+
+            return jsonify({'userid' : user_data.id,'message':'Data updated sucessfully','status':200})
 
 @user.route('/api/deleteCustomer',methods=['DELETE'])
 def deleteUser():

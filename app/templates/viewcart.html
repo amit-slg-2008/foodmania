@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="topnav">
+    <a class="active" href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+</div>
+<div class="row">
+    <div class="pull-right carttotalitems">
+        <p>Cart : <span id="totalitems">0</span> items</p> 
+    </div>
+</div>
+<div class="row carttable">
+    <h2>Cart</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Code</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th class="text-right">Total</th>
+        </tr>
+        </thead>
+        <tbody id="cartbody">
+        </tbody>
+    </table>
+    <div class="buttongroup">
+    <a href=index></a><button type="button" class="btn btn-primary pull-left">Back</button></a>
+    <a href=checkout><button type="button" class="btn btn-primary pull-right">Checkout</button></a>
+    </div>
+</div>
+{% endblock content %}

@@ -14,11 +14,20 @@ class Product(db.Model):
     quantity = db.Column(db.Integer,nullable=False)
     unit = db.Column(db.String(20),nullable=False)
     price = db.Column(db.Float,nullable=False)
+    image = db.Column(db.String(20),nullable=True)
     created_on = db.Column(db.DateTime, server_default=db.func.now())
     updated_on = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
 
     def __repr__(self):
         return '<User: {}>'.format(self.code)
+
+    def toString(self):
+        return ({'id':self.id, 
+                'name':self.name, 
+                'code':self.code, 
+                'quantity':self.quantity,
+                'unit':self.unit,
+                'price':self.price})
 
 class ProductSchema(ma.SQLAlchemyAutoSchema):
     class Meta:

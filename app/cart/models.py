@@ -18,7 +18,10 @@ class Cart(db.Model):
     def __repr__(self):
         return '<User: {}>'.format(self.code)
 
-class CartSchema(ma.SQLAlchemyAutoSchema):
-    class Meta:
-        model = Cart
-        load_instance = True
+    def toString(self):
+        return ({'id':self.id, 
+                'code':self.code, 
+                'product':self.product, 
+                'quantity':self.quantity,
+                'subtotal':self.subtotal,
+                'price':self.price})

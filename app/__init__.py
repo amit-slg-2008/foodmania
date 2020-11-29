@@ -37,4 +37,7 @@ def create_app(config_name):
     from .cart import cart as cart_blueprint
     app.register_blueprint(cart_blueprint)
 
+    from .page import page as page_blueprint
+    app.register_blueprint(page_blueprint)
+
     return app
