@@ -19,8 +19,7 @@ class Cart(db.Model):
         return '<User: {}>'.format(self.code)
 
     def toString(self):
-        return ({'id':self.id, 
-                'code':self.code, 
+        return ({'code':self.code, 
                 'product':self.product, 
                 'quantity':self.quantity,
                 'subtotal':self.subtotal,

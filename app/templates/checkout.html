@@ -7,7 +7,7 @@
 </div>
 <div class="row">
     <div class="pull-right carttotalitems">
-        <p>Cart : <span id="totalitems">0</span> items</p> 
+        <p><image src="/static/images/cart.png" class="cartimage"></image> : <span id="totalitems">0</span> items</p> 
     </div>
 </div>
 <div class="row">
@@ -18,55 +18,60 @@
 
 <div class="paddingcheckout">
     <div class="row">
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-header">
+        <div class="checkoutform">
+            <div class="">
+                <div class="header">
                     <h2>Checkout</h2>
                 </div>
-                <div class="card-body">
+                <div class="">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="name">Name</label>
+                                <label for="name">*Name</label>
                                 <input class="form-control" id="name" type="text" placeholder="Enter your name">
                             </div>
+                            <div class="errormsg"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="name">Email</label>
+                                <label for="name">*Email</label>
                                 <input class="form-control" id="email" type="text" placeholder="Enter your email">
                             </div>
+                            <div class="errormsg"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="name">Contact No</label>
+                                <label for="name">*Contact No</label>
                                 <input class="form-control" id="contactno" type="text" placeholder="Enter your Contact No">
                             </div>
+                            <div class="errormsg"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="name">Delivery Address</label>
+                                <label for="name">*Delivery Address</label>
                                 <textarea class="form-control" id="address" type="text" placeholder="Enter your Delivery"></textarea>
                             </div>
+                            <div class="errormsg"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="ccnumber">Credit Card Number</label>
+                                <label for="ccnumber">*Credit Card Number</label>
                                 <div class="input-group">
-                                    <input class="form-control" type="text" placeholder="0000 0000 0000 0000" max="16" autocomplete="email">
+                                    <input class="form-control" id="creditcard" type="text" placeholder="0000 0000 0000 0000" max="16" autocomplete="email">
                                     <div class="input-group-append">
                                         <span class="input-group-text">
                                             <i class="mdi mdi-credit-card"></i>
                                         </span>
                                     </div>
+                                    <div class="errormsg"></div>
                                 </div>
                             </div>
                         </div>
@@ -92,32 +97,31 @@
                         <div class="form-group col-sm-4">
                             <label for="ccyear">Year</label>
                             <select class="form-control" id="ccyear">
-                                <option>2014</option>
-                                <option>2015</option>
-                                <option>2016</option>
-                                <option>2017</option>
-                                <option>2018</option>
-                                <option>2019</option>
-                                <option>2020</option>
                                 <option>2021</option>
                                 <option>2022</option>
                                 <option>2023</option>
                                 <option>2024</option>
                                 <option>2025</option>
+                                <option>2026</option>
+                                <option>2027</option>
+                                <option>2028</option>
+                                <option>2029</option>
+                                <option>2030</option>
                             </select>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="cvv">CVV/CVC</label>
+                                <label for="cvv">*CVV/CVC</label>
                                 <input class="form-control" id="cvv" type="text" placeholder="123">
+                                <div class="errormsg"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-sm btn-danger" type="reset">
+                    <button class="btn btn-sm btn-danger" type="reset" style="width:150px;" id="checkoutback">
                         <i class="mdi mdi-lock-reset"></i> Back</button>
-                    <button class="btn btn-sm btn-success pull-right" type="button" id="placeorder">
+                    <button class="btn btn-sm btn-success pull-right" type="button" id="placeorder" style="width:150px;">
                         <i class="mdi mdi-gamepad-circle"></i> Place Order</button>
                 </div>
             </div>

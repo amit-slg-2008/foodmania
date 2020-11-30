@@ -1,4 +1,4 @@
-from flask import request,jsonify,session
+from flask import request,jsonify,session,json
 from datetime import datetime
 from . import cart
 from ..import db
@@ -31,7 +31,9 @@ def addToCart():
         db.session.add(cart_data)
         db.session.commit()
 
-        return jsonify({'message':'Data Added Successfully','status':200})
+        response = cart_data.toString()
+
+        return jsonify({'response':response,'message':'Data Added Successfully','status':200})
 
 @cart.route('/api/updateCartByProduct',methods=['PUT'])
 def updateCartByProduct():
@@ -49,7 +51,9 @@ def updateCartByProduct():
 
         db.session.commit()
 
-        return jsonify({'message':'Data updated sucessfully','status':200})
+        response = cart_data.toString()
+
+        return jsonify({'response':response,'message':'Data updated sucessfully','status':200})
 
 @cart.route('/api/totalItemsInCart',methods=['GET'])
 def totalItemsInCart():

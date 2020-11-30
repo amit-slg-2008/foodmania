@@ -7,18 +7,26 @@ $(document).ready(function(){
             {
                 data = response.products;
                 for(var i=0;i<data.length;i++){
-                    $(".productlist").append('<div class="col-sm-4">\
+                    if(data[i]['quantity']>=1000){
+                        product_qunatity = data[i]['quantity']/1000;
+                        product_unit = "kg";
+                    }else{
+                        product_qunatity = data[i]['quantity'];
+                        product_unit = data[i]['unit'];
+                    }
+                
+                    $(".productlist").append('<div class="col-sm-3">\
                         <div class="card" style="width: 18rem;">\
-                            <h5 class="card-title text-center">'+ data[i]['code'] + '-' + data[i]['quantity'] + data[i]['unit'] +'</h5>\
+                            <h5 class="card-title text-center">'+ data[i]['code'] + '-' + product_qunatity + product_unit +'</h5>\
                             <img src="/static/images/'+ data[i]['image'] + '" class="card-img-top cashewimage" alt="...">\
                             <div class="card-body">\
                                 <span class="text-center">\
                                     <button type="button" class="fa fa-minus subtract" aria-hidden="true"></button>\
-                                    <input class="quanbox" type="text" value="1" min="1" readonly/>\
+                                    <input class="quanbox" style="text-align: center;" type="text" value="1" min="1" readonly/>\
                                     <button type="button" class="fa fa-plus add" aria-hidden="true"></button>\
                                     <input type="hidden" class="hiddenquanbox" value="'+ data[i]['price'] +'" />\
                                 </span>\
-                                <p class="card-text text-center">Price : <span class="showprice">'+ data[i]['price'] +'</span></p>\
+                                <p class="card-text text-center pricesection">Price : <span class="showprice">'+ data[i]['price'] +'</span></p>\
                                 <button class="btn btn-success addtocart" data-id='+ data[i]['id'] +'>Add to Cart</button> \
                             </div>\
                         </div>\
@@ -33,6 +41,53 @@ $(document).ready(function(){
         get_total_cart_items();
         get_data_for_cart();
         get_total_cart_value();
+    });
+
+    $(".searchsubmit").click(function(){
+        var searchtext = $("#searchtext").val();
+        $.ajax({
+            url: '/api/searchProduct',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                'searchtext' : searchtext
+            }),
+            dataType: 'json',
+            success: function(response)
+            {
+                data = response.products;
+                $(".productlist").empty();
+                for(var i=0;i<data.length;i++){
+                    if(data[i]['quantity']>=1000){
+                        product_qunatity = data[i]['quantity']/1000;
+                        product_unit = "kg";
+                    }else{
+                        product_qunatity = data[i]['quantity'];
+                        product_unit = data[i]['unit'];
+                    }
+                
+                    $(".productlist").append('<div class="col-sm-3">\
+                        <div class="card" style="width: 18rem;">\
+                            <h5 class="card-title text-center">'+ data[i]['code'] + '-' + product_qunatity + product_unit +'</h5>\
+                            <img src="/static/images/'+ data[i]['image'] + '" class="card-img-top cashewimage" alt="...">\
+                            <div class="card-body">\
+                                <span class="text-center">\
+                                    <button type="button" class="fa fa-minus subtract" aria-hidden="true"></button>\
+                                    <input class="quanbox" style="text-align: center;" type="text" value="1" min="1" readonly/>\
+                                    <button type="button" class="fa fa-plus add" aria-hidden="true"></button>\
+                                    <input type="hidden" class="hiddenquanbox" value="'+ data[i]['price'] +'" />\
+                                </span>\
+                                <p class="card-text text-center pricesection">Price : <span class="showprice">'+ data[i]['price'] +'</span></p>\
+                                <button class="btn btn-success addtocart" data-id='+ data[i]['id'] +'>Add to Cart</button> \
+                            </div>\
+                        </div>\
+                    </div>');
+                }
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
     });
 
     $(document).on('click', '.add', function(){
@@ -116,9 +171,16 @@ $(document).ready(function(){
                 }else{
                     $('#minicartbody').empty();
                     for(var i=0;i<data.length;i++){
+                        if(data[i]['productquantity']>=1000){
+                            product_qunatity = data[i]['productquantity']/1000;
+                            product_unit = "kg";
+                        }else{
+                            product_qunatity = data[i]['productquantity'];
+                            product_unit = data[i]['unit'];
+                        }
                         $('#minicartbody').append('<tr>\
                             <td>'+ (i+1) +'</td> \
-                            <td>'+ data[i]['productcode'] + '-' + data[i]['productquantity'] + data[i]['unit'] +'</td> \
+                            <td>'+ data[i]['productcode'] + '-' + product_qunatity + product_unit +'</td> \
                             <td>'+ data[i]['quantity'] + '</td> \
                             <td align="right">'+ data[i]['total'] + '</td> \
                         </tr>');
@@ -148,13 +210,20 @@ $(document).ready(function(){
                 }else{
                     $('#cartbody').empty();
                     for(var i=0;i<data.length;i++){
+                        if(data[i]['productquantity']>=1000){
+                            product_qunatity = data[i]['productquantity']/1000;
+                            product_unit = "kg";
+                        }else{
+                            product_qunatity = data[i]['productquantity'];
+                            product_unit = data[i]['unit'];
+                        }
                         $('#cartbody').append('<tr>\
                             <td>'+ (i+1) +'</td> \
-                            <td>'+ data[i]['productcode'] + '-' + data[i]['productquantity'] + data[i]['unit'] +'</td> \
+                            <td>'+ data[i]['productcode'] + '-' + product_qunatity + product_unit +'</td> \
                             <td>'+ data[i]['price'] + '</td> \
                             <td>\
                             <button type="button" class="fa fa-minus subtractproductcart" aria-hidden="true"></button>\
-                            <input class="quanbox" type="text" value="'+ data[i]['quantity'] +'" min="1" readonly/>\
+                            <input class="quanbox" type="text" style="text-align: center;" value="'+ data[i]['quantity'] +'" min="1" readonly/>\
                             <button type="button" class="fa fa-plus addproductcart" aria-hidden="true"></button>\
                             <input type="hidden" class="hiddenidbox" value="'+ data[i]['productid'] +'" />\
                             <input type="hidden" class="hiddenpricebox" value="'+ data[i]['price'] +'" /></td> \
@@ -235,27 +304,79 @@ $(document).ready(function(){
         var email = $("#email").val();
         var contactno = $("#contactno").val();
         var address = $("#address").val();
-        var userid;
-        $.ajax({
-            url: '/api/createCustomer',
-            type: 'POST',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                'username' : name,
-                'email' : email,
-                'contactno' : contactno,
-                'address' : address
-            }),
-            dataType: 'json',
-            success: function(response)
-            {
-                userid = response.userid;
-            },
-            complete: function(){
-                place_order(userid);
-            }
-        });
+        var creditcard = $("#creditcard").val();
+        var ccmonth = $("#ccmonth").val();
+        var ccyear = $("#ccyear").val();
+        var cvv = $("#cvv").val();
+        customerdata = {
+            'name' : name,
+            'email' : email,
+            'contactno' : contactno,
+            'address' : address,
+            'creditcard' : creditcard,
+            'ccmonth' : ccmonth,
+            'ccyear' : ccyear,
+            'cvv' : cvv
+        }
+        if(check(customerdata)==true){
+            var userid;
+            $.ajax({
+                url: '/api/createCustomer',
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(customerdata),
+                dataType: 'json',
+                success: function(response)
+                {
+                    userid = response.userid;
+                },
+                complete: function(){
+                    place_order(userid);
+                }
+            });
+        }
     });
+
+    $("input").keypress(function(){
+        $('.errormsg').html("");
+    });
+
+    function check(customerdata){
+        var msg;
+        if(customerdata['name']===""){
+            msg = "*Name cannot be left blank";
+            $errormsg = $("#name").parent().parent().find('.errormsg');
+            $errormsg.html(msg);
+            return false;
+        }else if(customerdata['email']===""){
+            msg = "*Email cannot be left blank";
+            $errormsg = $("#email").parent().parent().find('.errormsg');
+            $errormsg.html(msg);
+            return false;
+        }else if(customerdata['contactno']===""){
+            msg = "*Contact No cannot be left blank";
+            $errormsg = $("#contactno").parent().parent().find('.errormsg');
+            $errormsg.html(msg);
+            return false;
+        }else if(customerdata['address']===""){
+            msg = "*Address cannot be left blank";
+            $errormsg = $("#address").parent().parent().find('.errormsg');
+            $errormsg.html(msg);
+            return false;
+        }else if(customerdata['creditcard']===""){
+            msg = "*Credit Card cannot be left blank";
+            $errormsg = $("#creditcard").parent().find('.errormsg');
+            $errormsg.html(msg);
+            return false;
+        }else if(customerdata['cvv']===""){
+            msg = "*CVV cannot be left blank";
+            $errormsg = $("#cvv").parent().find('.errormsg');
+            $errormsg.html(msg);
+            return false;
+        }else{
+            return true;
+        }
+    }
 
     function place_order(userid){
         console.log(userid);
@@ -269,10 +390,22 @@ $(document).ready(function(){
             dataType: 'json',
             success: function(response)
             {
-                console.log(response);
-                $(location).attr('href', 'home.html')
+                alert(response.message);
+                window.location = "/";
             }
         });
     }
+
+    $("#checkoutback").click(function(){
+        window.location = "/viewcart";
+    });
+
+    $("#viewcartback").click(function(){
+        window.location = "/";
+    });
+
+    $("#homecheckout").click(function(){
+        window.location = "/viewcart";
+    });
 
 });

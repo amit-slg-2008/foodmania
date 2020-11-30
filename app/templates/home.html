@@ -5,15 +5,13 @@
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
     <div class="search-container">
-      <form action="/action_page.php">
-        <input type="text" placeholder="Search.." name="search">
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+      <input type="text" placeholder="Search.." id="searchtext">
+      <button type="button" class="btn btn-primary searchsubmit">Submit</button>
     </div>
 </div>
 <div class="row">
     <div class="pull-right carttotalitems">
-        <p>Cart : <span id="totalitems">0</span> items</p> 
+        <p><image src="/static/images/cart.png" class="cartimage"></image> : <span id="totalitems">0</span> items</p> 
     </div>
 </div>
 <div class="row">
@@ -35,7 +33,7 @@
             </tbody>
         </table>
         <div class="buttongroup">
-          <a href=viewcart></a><button type="button" class="btn btn-primary pull-left">Checkout</button></a>
+          <a href=viewcart></a><button type="button" class="btn btn-primary pull-left" id="homecheckout">Checkout</button></a>
           <a href=viewcart><button type="button" class="btn btn-primary pull-right">View Cart</button></a>
         </div>
     </div>

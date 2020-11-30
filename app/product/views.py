@@ -28,16 +28,17 @@ def createProduct():
 @product.route('/api/listOfProducts',methods=['GET'])
 def listOfProducts():
     if request.method == 'GET':
-        products = Product.query.all()
+        products = Product.query.order_by(Product.code.asc(),Product.quantity.asc()).all()
         product_schema = ProductSchema(many=True)
         output = product_schema.dump(products)
         return jsonify({'products':output})
 
-# @product.route('/api/searchProduct',methods=['GET'])
-# def searchProduct():
-#     if request.method == 'GET':
-#         text = request.form["text"]
-#         products = Product.query.whoosh_search(text)
-#         product_schema = ProductSchema(many=True)
-#         output = product_schema.dump(products)
-#         return jsonify({'products':output})
+@product.route('/api/searchProduct',methods=['POST'])
+def searchProduct():
+    if request.method == 'POST':
+        data = request.get_json()
+        searchtext = data.get('searchtext')
+        result = db.engine.execute("Select * from products WHERE code LIKE '%%"+ searchtext +"%%' OR quantity LIKE '%%"+ searchtext +"%%' OR price LIKE '%%"+ searchtext +"%%' ORDER BY code,quantity")
+        product_schema = ProductSchema(many=True)
+        output = product_schema.dump(result)
+        return jsonify({'products':output,'searchtext':searchtext})

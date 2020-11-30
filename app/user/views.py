@@ -9,7 +9,7 @@ from .models import User,UserSchema
 def createUser():
     if request.method == 'POST':
         data = request.get_json()
-        username = data.get('username')
+        username = data.get('name')
         contactno = data.get('contactno')
         email = data.get('email')
         address = data.get('address')

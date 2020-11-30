@@ -18,3 +18,14 @@ class Order(db.Model):
 
     def __repr__(self):
         return '<User: {}>'.format(self.code)
+    
+    def toString(self):
+        return ({'id':self.id, 
+                'code':self.code, 
+                'user':self.user,
+                'product':self.product, 
+                'quantity':self.quantity,
+                'subtotal':self.subtotal,
+                'price':self.price,
+                'created_on':self.created_on,
+                'updated_on':self.updated_on})

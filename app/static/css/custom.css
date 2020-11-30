@@ -51,7 +51,7 @@ body {
   cursor: pointer;
 }
 .carttotalitems{
-  padding-right: 20px;
+  padding-right: 30px;
 }
 .carttable{
   padding-left: 20px;
@@ -61,10 +61,39 @@ body {
   padding-left: 50px;
 }
 .cashewimage{
-  width: 100px;
-  height: 100px;
+  width: 170px;
+  height: 140px;
 }
-
+.quanbox{
+  width: 108px;
+}
+.addtocart{
+  width: 173px;
+}
+.pricesection{
+  font-weight: bold;
+  padding-top: 10px;
+}
+.cartimage{
+  height: 25px;
+}
+.card-title{
+  font-weight: bold;
+}
+.carttotalitems{
+  font-weight: bold;
+}
+.checkoutform{
+  widows: 100%;
+  padding-right: 30px;
+}
+.card-body{
+  padding-top: 10px;
+}
+.errormsg{
+  color : red;
+  font-style: italic;
+}
 @media screen and (max-width: 600px) {
   .topnav .search-container {
     float: none;

@@ -13,6 +13,7 @@ def placeOrder():
         user = data.get('userid')
         cartsdata = Cart.query.filter_by(code=code)
         objects = []
+        objectstoresponse = []
         for cartdata in cartsdata:
             code = cartdata.code
             product = cartdata.product
@@ -20,7 +21,10 @@ def placeOrder():
             price = cartdata.price
             subtotal = cartdata.subtotal
 
-            objects.append(Order(code=code,user=user,product=product,quantity=quantity,price=price,subtotal=subtotal))
+            order_data = Order(code=code,user=user,product=product,quantity=quantity,price=price,subtotal=subtotal)
+            objects.append(order_data)
+            response = order_data.toString()
+            objectstoresponse.append(response)
 
         db.session.add_all(objects)
         db.session.commit()
@@ -30,4 +34,4 @@ def placeOrder():
         Cart.query.filter_by(code=code).delete()
         db.session.commit()
 
-        return jsonify({'message':'Data added sucessfully','status':200})
+        return jsonify({'response':objectstoresponse,'message':'Order Placed Successfully!!','status':200})

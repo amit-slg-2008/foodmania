@@ -7,6 +7,7 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_marshmallow import Marshmallow
 
+
 # local imports
 from config import app_config
 
